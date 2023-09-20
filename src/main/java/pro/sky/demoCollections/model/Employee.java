@@ -1,4 +1,4 @@
-package pro.sky.demoCollections.service;
+package pro.sky.demoCollections.model;
 
 import java.util.Objects;
 

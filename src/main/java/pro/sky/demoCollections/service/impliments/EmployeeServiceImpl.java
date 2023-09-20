@@ -4,10 +4,10 @@ import org.springframework.stereotype.Service;
 import pro.sky.demoCollections.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.demoCollections.exceptions.EmployeeNotFoundException;
 import pro.sky.demoCollections.exceptions.EmployeeStorageIsFullException;
-import pro.sky.demoCollections.service.Employee;
+import pro.sky.demoCollections.model.Employee;
 import pro.sky.demoCollections.service.EmployeeService;
 
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -20,57 +20,41 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void addEmployee(String firstName, String lastName) {
-
-        for (Employee employee : employeeList) {
-            if (employee.getFirstName().equals(firstName) && employee.getLastName().equals(lastName)) {
-                throw new EmployeeAlreadyAddedException("Пользователь уже создан");
-            }
+    public Employee addEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        if (employeeList.contains(employee)) {
+            throw new EmployeeAlreadyAddedException("Уже есть такой пользователь");
         }
         if (employeeList.size() < limitEmployees) {
-            employeeList.add(new Employee(firstName, lastName));
+            employeeList.add(employee);
+        } else throw new EmployeeStorageIsFullException("Лимит пользователей исчерпан");
 
-        } else {
-            throw new EmployeeStorageIsFullException("Лимит добавления пользователей исчерпан.");
-        }
+
+        return employee;
     }
 
     @Override
     public Employee removeEmployee(String firstName, String lastName) {
-        Employee signEmployee = null;
-        Iterator<Employee> employeeIterator = employeeList.iterator();
-        while (employeeIterator.hasNext()) {
-            Employee employee = employeeIterator.next();
-            if (firstName.equals(employee.getFirstName()) && lastName.equals(employee.getLastName())) {
-                signEmployee = employee;
-                employeeIterator.remove();
-            }
+        Employee employee = new Employee(firstName, lastName);
+        if (employeeList.contains(employee)) {
+            employeeList.remove(employee);
+            return employee;
         }
-        if (signEmployee == null) {
-            throw new EmployeeNotFoundException("Пользователя с таким именем не найдено.");
-        }
-        return signEmployee;
+
+        throw new EmployeeNotFoundException("Пользователь не найден");
     }
 
     @Override
     public Employee findEmployee(String firstName, String lastName) {
-        Employee searchEmployee = null;
-        Iterator<Employee> employeeIterator = employeeList.iterator();
-        while (employeeIterator.hasNext()) {
-            Employee employee = employeeIterator.next();
-            if (firstName.equals(employee.getFirstName()) && lastName.equals(employee.getLastName())) {
-                searchEmployee = employee;
-                return searchEmployee;
-            }
+        Employee employee = new Employee(firstName, lastName);
+        if (employeeList.contains(employee)) {
+            return employee;
         }
-        if (searchEmployee == null) {
-            throw new EmployeeNotFoundException("Пользователя с таким именем не найдено.");
-        }
-        return searchEmployee;
+        throw new EmployeeNotFoundException("Пользователь не найден");
     }
 
     @Override
     public List<Employee> getEmployeeList() {
-        return this.employeeList;
+        return Collections.unmodifiableList(employeeList);
     }
 }
