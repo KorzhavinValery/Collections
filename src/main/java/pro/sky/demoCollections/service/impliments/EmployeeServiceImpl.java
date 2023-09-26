@@ -7,6 +7,7 @@ import pro.sky.demoCollections.exceptions.EmployeeStorageIsFullException;
 import pro.sky.demoCollections.model.Employee;
 import pro.sky.demoCollections.service.EmployeeService;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee addEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee addEmployee(String firstName, String lastName, String salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employeeList.contains(employee)) {
             throw new EmployeeAlreadyAddedException("Уже есть такой пользователь");
         }
@@ -34,8 +35,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee removeEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee removeEmployee(String firstName, String lastName, String salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employeeList.contains(employee)) {
             employeeList.remove(employee);
             return employee;
@@ -45,16 +46,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee findEmployee(String firstName, String lastName, String salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employeeList.contains(employee)) {
             return employee;
         }
         throw new EmployeeNotFoundException("Пользователь не найден");
     }
-
     @Override
-    public List<Employee> getEmployeeList() {
-        return Collections.unmodifiableList(employeeList);
+    public Collection<Employee> getEmployeeList() {
+        return Collections.unmodifiableCollection(employeeList);
     }
 }

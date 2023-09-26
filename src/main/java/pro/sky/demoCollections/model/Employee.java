@@ -1,14 +1,20 @@
 package pro.sky.demoCollections.model;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Objects;
 
 public class Employee {
     private String firstName;
     private String lastName;
+    private BigDecimal salary;
+    private int department;
 
-    public Employee(String firstName, String lastName) {
+    public Employee(String firstName, String lastName, String salary, int department) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.salary = new BigDecimal(String.valueOf(salary));
+        this.department = department;
     }
 
     public String getFirstName() {

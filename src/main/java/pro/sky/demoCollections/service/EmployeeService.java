@@ -2,14 +2,15 @@ package pro.sky.demoCollections.service;
 
 import pro.sky.demoCollections.model.Employee;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface EmployeeService {
-    Employee addEmployee(String firstName, String lastName);
 
-    Employee removeEmployee(String firstName, String lastName);
+    Employee addEmployee(String firstName, String lastName, String salary, int department);
 
-    Employee findEmployee(String firstName, String lastName);
+    Employee removeEmployee(String firstName, String lastName, String salary, int department);
 
-    List<Employee> getEmployeeList();
+    Employee findEmployee(String firstName, String lastName, String salary, int department);
+
+    Collection<Employee> getEmployeeList();
 }
