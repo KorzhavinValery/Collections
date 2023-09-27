@@ -44,6 +44,6 @@ public class EmployeeController {
 
     @GetMapping()
     public Collection<Employee> printAll() {
-        return employeeService.getEmployeeList();
+        return employeeService.getEmployeeMap();
     }
 }

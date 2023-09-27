@@ -1,7 +1,7 @@
 package pro.sky.demoCollections.model;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Employee {
@@ -33,22 +33,39 @@ public class Employee {
         this.lastName = lastName;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    public int getDepartment() {
+        return department;
+    }
+    public BigDecimal getSalary() {
+        return salary.setScale(2, RoundingMode.HALF_UP);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
+        return  department == employee.department &&
+                Objects.equals(firstName, employee.firstName) &&
+                Objects.equals(lastName, employee.lastName) &&
+                Objects.equals(salary, employee.salary);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName);
+        return Objects.hash(firstName, lastName, salary, department);
     }
 
     @Override
     public String toString() {
-        return
-                "ФИО сотрудника: " + firstName + " " + lastName;
+        return String.format(
+                "ФИО Сотрудника - %s; Оклад - %.2f; Номер Отдела - %d",
+                firstName + " " + lastName,
+                salary,
+                department
+        );
     }
 }

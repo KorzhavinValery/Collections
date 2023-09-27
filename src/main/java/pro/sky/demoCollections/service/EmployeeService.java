@@ -12,5 +12,5 @@ public interface EmployeeService {
 
     Employee findEmployee(String firstName, String lastName, String salary, int department);
 
-    Collection<Employee> getEmployeeList();
+    Collection<Employee> getEmployeeMap();
 }

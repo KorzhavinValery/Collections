@@ -15,7 +15,7 @@ public interface DepartamentService {
 
     Collection<Employee> printAllFromDepartment(int department);
 
-    Map<Integer, List<Employee>> printSortedByDepartment(int department);
+    Map<Integer, List<Employee>> printSortedByDepartment();
 
 
 }
