@@ -1,9 +1,6 @@
 package pro.sky.demoCollections.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.sky.demoCollections.model.Employee;
 import pro.sky.demoCollections.service.DepartamentService;
 
@@ -13,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/department")
+@RequestMapping(value = "/departments")
 public class DepartmentController {
     private final DepartamentService departamentService;
 
@@ -21,27 +18,27 @@ public class DepartmentController {
         this.departamentService = departamentService;
     }
 
-    @GetMapping(path = "{id}/salary/max")
-    public Employee findMaxSalaryFromDepartment(@PathVariable(value = "id") int departmentId) {
+    @GetMapping(path = "/max-salary")
+    public Employee findMaxSalaryFromDepartment(@RequestParam int departmentId) {
         return departamentService.findMaxSalaryInDepartment(departmentId);
     }
 
-    @GetMapping(path = "{id}/salary/min")
-    public Employee findMinSalaryFromDepartment(@PathVariable(value = "id") int departmentId) {
+    @GetMapping(path = "/min-salary")
+    public Employee findMinSalaryFromDepartment(@RequestParam int departmentId) {
         return departamentService.findMinSalaryInDepartment(departmentId);
     }
 
-    @GetMapping(path = "/employees")
+    @GetMapping(path = "/all")
     public Map<Integer, List<Employee>> printAllFromDepartment() {
         return departamentService.printSortedByDepartment();
     }
-    @GetMapping(path = "/{id}/employees")
-    public Collection<Employee> printAllFromDepartment(@PathVariable(value = "id") int departmentId) {
+    @GetMapping(path = "/all", params = "departmentId")
+    public Collection<Employee> printAllFromDepartment(@RequestParam (value = "departmentId") int departmentId) {
         return departamentService.printAllFromDepartment(departmentId);
     }
 
-    @GetMapping(path = "{id}/salary/sum")
-    public BigDecimal printSalaryPerDepartment(@PathVariable(value = "id") int departmentId) {
+    @GetMapping(path = "/sum-salary")
+    public BigDecimal printSalaryPerDepartment(@RequestParam int departmentId) {
         return departamentService.printSalaryPerDepartment(departmentId);
     }
 
