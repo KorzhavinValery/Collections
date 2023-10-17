@@ -44,15 +44,17 @@ public class Employee {
     public int getDepartment() {
         return department;
     }
+
     public BigDecimal getSalary() {
         return salary.setScale(2, RoundingMode.HALF_UP);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return  department == employee.department &&
+        return department == employee.department &&
                 Objects.equals(firstName, employee.firstName) &&
                 Objects.equals(lastName, employee.lastName) &&
                 Objects.equals(salary, employee.salary);
