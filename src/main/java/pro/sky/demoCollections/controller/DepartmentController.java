@@ -18,28 +18,29 @@ public class DepartmentController {
         this.departamentService = departamentService;
     }
 
-    @GetMapping(path = "/max-salary")
-    public Employee findMaxSalaryFromDepartment(@RequestParam int departmentId) {
+    @GetMapping(path = "/{id}/salary/max")
+    public Employee findMaxSalaryFromDepartment(@PathVariable(value = "id") int departmentId) {
         return departamentService.findMaxSalaryInDepartment(departmentId);
     }
 
-    @GetMapping(path = "/min-salary")
-    public Employee findMinSalaryFromDepartment(@RequestParam int departmentId) {
+    @GetMapping(path = "/{id}/salary/min")
+    public Employee findMinSalaryFromDepartment(@PathVariable (value = "id") int departmentId) {
         return departamentService.findMinSalaryInDepartment(departmentId);
     }
 
-    @GetMapping(path = "/all")
-    public Map<Integer, List<Employee>> printAllFromDepartment() {
-        return departamentService.printSortedByDepartment();
+    @GetMapping(path = "/{id}/salary/sum")
+    public BigDecimal printSalaryPerDepartment(@PathVariable (value = "id") int departmentId) {
+        return departamentService.printSalaryPerDepartment(departmentId);
     }
-    @GetMapping(path = "/all", params = "departmentId")
-    public Collection<Employee> printAllFromDepartment(@RequestParam (value = "departmentId") int departmentId) {
+
+    @GetMapping(path = "/{id}/employees")
+    public Collection<Employee> printAllFromDepartment(@PathVariable (value = "id") int departmentId) {
         return departamentService.printAllFromDepartment(departmentId);
     }
 
-    @GetMapping(path = "/sum-salary")
-    public BigDecimal printSalaryPerDepartment(@RequestParam int departmentId) {
-        return departamentService.printSalaryPerDepartment(departmentId);
+    @GetMapping(path = "/employees")
+    public Map<Integer, List<Employee>> printAllFromDepartment() {
+        return departamentService.printSortedByDepartment();
     }
 
 
