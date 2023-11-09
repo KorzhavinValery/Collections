@@ -1,6 +1,5 @@
 package pro.sky.demoCollections.service;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pro.sky.demoCollections.exceptions.EmployeeAlreadyAddedException;
@@ -8,17 +7,17 @@ import pro.sky.demoCollections.exceptions.EmployeeNotFoundException;
 import pro.sky.demoCollections.exceptions.EmployeeStorageIsFullException;
 import pro.sky.demoCollections.exceptions.InvalidInputException;
 import pro.sky.demoCollections.model.Employee;
-import pro.sky.demoCollections.service.impliments.EmployeeServiceImpl;
+import pro.sky.demoCollections.service.impliments.EmployeeService;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class EmployeeServiceImplTest {
+public class EmployeeServiceTest {
 
 
-    private EmployeeServiceImpl out;
+    private EmployeeService out;
     @BeforeEach
     void setUp() {
-        out = new EmployeeServiceImpl();
+        out = new EmployeeService();
         out.addEmployee("Fedor", "Symkin", 5, 4);
         out.addEmployee("Bilbo", "Begins", 100, 4);
         out.addEmployee("Semen", "Pytnik", 5, 4);

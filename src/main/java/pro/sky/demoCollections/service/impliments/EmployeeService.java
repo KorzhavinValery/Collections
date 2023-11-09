@@ -1,24 +1,22 @@
 package pro.sky.demoCollections.service.impliments;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.demoCollections.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.demoCollections.exceptions.EmployeeNotFoundException;
 import pro.sky.demoCollections.exceptions.EmployeeStorageIsFullException;
 import pro.sky.demoCollections.exceptions.InvalidInputException;
 import pro.sky.demoCollections.model.Employee;
-import pro.sky.demoCollections.service.EmployeeService;
 
 import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.*;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeService implements pro.sky.demoCollections.service.EmployeeService {
     private final Map<String, Employee> employeeMap;
     private static final int limitEmployees = 5;
 
-    public EmployeeServiceImpl() {
+    public EmployeeService() {
         this.employeeMap = new HashMap<>();
     }
 
