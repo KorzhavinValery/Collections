@@ -13,16 +13,16 @@ import java.util.stream.Collectors;
 
 @Service
 public class DepartmentServiceImpl implements DepartamentService {
-    private final EmployeeService employeeService;
+    private final EmployeeServiceImpl employeeServiceImpl;
 
-    public DepartmentServiceImpl(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public DepartmentServiceImpl(EmployeeServiceImpl employeeServiceImpl) {
+        this.employeeServiceImpl = employeeServiceImpl;
     }
 
 
     @Override
     public Employee findMaxSalaryInDepartment(int department) {
-        return employeeService.getEmployeeMap().stream()
+        return employeeServiceImpl.getEmployeeMap().stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .max(Comparator.comparing(Employee::getSalary))
                 .orElseThrow(InvalidInputException::new);
@@ -30,7 +30,7 @@ public class DepartmentServiceImpl implements DepartamentService {
 
     @Override
     public Employee findMinSalaryInDepartment(int department) {
-        return employeeService.getEmployeeMap().stream()
+        return employeeServiceImpl.getEmployeeMap().stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .min(Comparator.comparing(Employee::getSalary))
                 .orElseThrow(InvalidInputException::new);
@@ -38,23 +38,20 @@ public class DepartmentServiceImpl implements DepartamentService {
 
     @Override
     public Integer printSalaryPerDepartment(int department) {
-       return employeeService.getEmployeeMap()
+        return employeeServiceImpl.getEmployeeMap()
                 .stream()
-               .filter(employee -> employee.getDepartment()==department)
+                .filter(employee -> employee.getDepartment() == department)
                 .collect(Collectors.summingInt(empl -> empl.getSalary()));
-                };
-
-
-
+    }
 
     @Override
     public Collection<Employee> printAllFromDepartment(int department) {
-        return employeeService.getEmployeeMap().stream().filter(employee -> employee.getDepartment() == department).toList();
+        return employeeServiceImpl.getEmployeeMap().stream().filter(employee -> employee.getDepartment() == department).toList();
     }
 
     @Override
     public Map<Integer, List<Employee>> printSortedByDepartment() {
-        return employeeService.getEmployeeMap().stream()
+        return employeeServiceImpl.getEmployeeMap().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
 }

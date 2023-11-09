@@ -24,9 +24,8 @@ public class DepartmentServiceTestConstants {
 
     public static final List<Employee> EMPLOYEES = List.of(MAX_SALARY_EMPLOYEE, MIN_SALARY_EMPLOYEE);
     public static final List<Employee> ALL_EMPLOYEES = List.of(MAX_SALARY_EMPLOYEE, MIN_SALARY_EMPLOYEE, OTHER_DEPARTMENT_EMPLOYEE);
-    public static final Map<Integer,List<Employee>> GROUPING_BY_DEPARTMENTS_MAP = ALL_EMPLOYEES.stream()
+    public static final Map<Integer, List<Employee>> GROUPING_BY_DEPARTMENTS_MAP = ALL_EMPLOYEES.stream()
             .collect(Collectors.groupingBy(Employee::getDepartment));
-    public static final int DEPARTMENT_TOTAL_SALARY = EMPLOYEES.stream().mapToInt(Employee::getSalary).sum();
 
 
 }

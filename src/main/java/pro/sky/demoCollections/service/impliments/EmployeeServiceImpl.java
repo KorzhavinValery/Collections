@@ -6,17 +6,18 @@ import pro.sky.demoCollections.exceptions.EmployeeNotFoundException;
 import pro.sky.demoCollections.exceptions.EmployeeStorageIsFullException;
 import pro.sky.demoCollections.exceptions.InvalidInputException;
 import pro.sky.demoCollections.model.Employee;
+import pro.sky.demoCollections.service.EmployeeService;
 
 import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.*;
 
 @Service
-public class EmployeeService implements pro.sky.demoCollections.service.EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService {
     private final Map<String, Employee> employeeMap;
     private static final int limitEmployees = 5;
 
-    public EmployeeService() {
+    public EmployeeServiceImpl() {
         this.employeeMap = new HashMap<>();
     }
 

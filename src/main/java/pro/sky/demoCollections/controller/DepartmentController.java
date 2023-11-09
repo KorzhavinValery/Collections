@@ -24,17 +24,17 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/{id}/salary/min")
-    public Employee findMinSalaryFromDepartment(@PathVariable (value = "id") int departmentId) {
+    public Employee findMinSalaryFromDepartment(@PathVariable(value = "id") int departmentId) {
         return departamentService.findMinSalaryInDepartment(departmentId);
     }
 
     @GetMapping(path = "/{id}/salary/sum")
-    public Integer printSalaryPerDepartment(@PathVariable (value = "id") int departmentId) {
+    public Integer printSalaryPerDepartment(@PathVariable(value = "id") int departmentId) {
         return departamentService.printSalaryPerDepartment(departmentId);
     }
 
     @GetMapping(path = "/{id}/employees")
-    public Collection<Employee> printAllFromDepartment(@PathVariable (value = "id") int departmentId) {
+    public Collection<Employee> printAllFromDepartment(@PathVariable(value = "id") int departmentId) {
         return departamentService.printAllFromDepartment(departmentId);
     }
 

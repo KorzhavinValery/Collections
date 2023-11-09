@@ -5,60 +5,61 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pro.sky.demoCollections.model.Employee;
+import pro.sky.demoCollections.exceptions.InvalidInputException;
 import pro.sky.demoCollections.service.impliments.DepartmentServiceImpl;
-import pro.sky.demoCollections.service.impliments.EmployeeService;
+import pro.sky.demoCollections.service.impliments.EmployeeServiceImpl;
 
-import java.util.List;
-
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 import static pro.sky.demoCollections.constants.DepartmentServiceTestConstants.*;
 
 @ExtendWith(MockitoExtension.class)
 public class DepartmentServiceImplTest {
     @Mock
-    private EmployeeService employeeService;
+    private EmployeeServiceImpl employeeServiceImpl;
     @InjectMocks
     private DepartmentServiceImpl out;
 
 
-
-
-
     @Test
     void shouldFindMaxSalaryInDepartment() {
-        when(employeeService.getEmployeeMap()).thenReturn(EMPLOYEES);
-        Employee maxSalary = out.findMaxSalaryInDepartment(EMPLOYEES.get(0).getDepartment());
-        assertEquals(EMPLOYEES.get(0), maxSalary);
+        when(employeeServiceImpl.getEmployeeMap()).thenReturn(EMPLOYEES);
+        assertEquals(MAX_SALARY_EMPLOYEE, out.findMaxSalaryInDepartment(DEPARTMENT_ID2));
 
     }
+
     @Test
     void shouldThrowExceptionWhenEmployeeWithMaxSalaryNotInDepartment() {
-
+        when(employeeServiceImpl.getEmployeeMap()).thenReturn(emptyList());
+        assertThrows(InvalidInputException.class, () -> out.findMaxSalaryInDepartment(DEPARTMENT_ID2));
     }
 
     @Test
     void shouldThrowExceptionWhenEmployeeWithMinSalaryNotInDepartment() {
-
+        when(employeeServiceImpl.getEmployeeMap()).thenReturn(emptyList());
+        assertThrows(InvalidInputException.class, () -> out.findMinSalaryInDepartment(DEPARTMENT_ID2));
     }
 
     @Test
     void shouldFindMinSalaryInDepartment() {
-        when(employeeService.getEmployeeMap()).thenReturn(EMPLOYEES);
-        Employee minSalary = out.findMinSalaryInDepartment(EMPLOYEES.get(0).getDepartment());
-        assertEquals(EMPLOYEES.get(3), minSalary);
+        when(employeeServiceImpl.getEmployeeMap()).thenReturn(EMPLOYEES);
+        assertEquals(MIN_SALARY_EMPLOYEE, out.findMinSalaryInDepartment(DEPARTMENT_ID2));
     }
 
     @Test
     void shouldReturnAllEmployees() {
-        when(employeeService.getEmployeeMap()).thenReturn(ALL_EMPLOYEES);
+        when(employeeServiceImpl.getEmployeeMap()).thenReturn(ALL_EMPLOYEES);
         assertEquals(GROUPING_BY_DEPARTMENTS_MAP, out.printSortedByDepartment());
 
     }
 
     @Test
     void shouldReturnEmptyList() {
-
+        when(employeeServiceImpl.getEmployeeMap()).thenReturn(emptyList());
+        assertEquals(emptyMap(), out.printSortedByDepartment());
     }
+
 }

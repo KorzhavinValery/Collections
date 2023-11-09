@@ -7,17 +7,18 @@ import pro.sky.demoCollections.exceptions.EmployeeNotFoundException;
 import pro.sky.demoCollections.exceptions.EmployeeStorageIsFullException;
 import pro.sky.demoCollections.exceptions.InvalidInputException;
 import pro.sky.demoCollections.model.Employee;
-import pro.sky.demoCollections.service.impliments.EmployeeService;
+import pro.sky.demoCollections.service.impliments.EmployeeServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class EmployeeServiceTest {
+public class EmployeeServiceImplTest {
 
 
-    private EmployeeService out;
+    private EmployeeServiceImpl out;
+
     @BeforeEach
     void setUp() {
-        out = new EmployeeService();
+        out = new EmployeeServiceImpl();
         out.addEmployee("Fedor", "Symkin", 5, 4);
         out.addEmployee("Bilbo", "Begins", 100, 4);
         out.addEmployee("Semen", "Pytnik", 5, 4);
@@ -52,10 +53,10 @@ public class EmployeeServiceTest {
     void shouldThrowExceptionStorageIsFullWhenAddEmployee() {
         Employee result = new Employee("Limit", "Prevushen", 1000, 2);
 
-            out.addEmployee(expected.getFirstName(),
-                    expected.getLastName(),
-                    expected.getSalary(),
-                    expected.getDepartment());
+        out.addEmployee(expected.getFirstName(),
+                expected.getLastName(),
+                expected.getSalary(),
+                expected.getDepartment());
 
 
         assertThrows(EmployeeStorageIsFullException.class,
