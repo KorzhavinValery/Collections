@@ -29,7 +29,7 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/{id}/salary/sum")
-    public BigDecimal printSalaryPerDepartment(@PathVariable (value = "id") int departmentId) {
+    public Integer printSalaryPerDepartment(@PathVariable (value = "id") int departmentId) {
         return departamentService.printSalaryPerDepartment(departmentId);
     }
 

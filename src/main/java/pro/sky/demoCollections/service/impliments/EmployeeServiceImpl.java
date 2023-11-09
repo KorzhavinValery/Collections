@@ -23,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee addEmployee(String firstName, String lastName, String salary, int department) {
+    public Employee addEmployee(String firstName, String lastName, int salary, int department) {
         validateInput(firstName, lastName);
 
         Employee employee = new Employee(firstName, lastName, salary, department);
@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee removeEmployee(String firstName, String lastName, String salary, int department) {
+    public Employee removeEmployee(String firstName, String lastName, int salary, int department) {
         validateInput(firstName, lastName);
         Employee employee = new Employee(firstName, lastName, salary, department);
         if (employeeMap.containsKey(employee.getFullName())) {
@@ -51,7 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findEmployee(String firstName, String lastName, String salary, int department) {
+    public Employee findEmployee(String firstName, String lastName, int salary, int department) {
         validateInput(firstName, lastName);
         Employee employee = new Employee(firstName, lastName, salary, department);
         if (employeeMap.containsKey(employee.getFullName())) {

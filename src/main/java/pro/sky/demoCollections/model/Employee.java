@@ -11,13 +11,13 @@ import static org.apache.commons.lang3.StringUtils.*;
 public class Employee {
     private String firstName;
     private String lastName;
-    private BigDecimal salary;
+    private int salary;
     private int department;
 
-    public Employee(String firstName, String lastName, String salary, int department) {
+    public Employee(String firstName, String lastName, int salary, int department) {
         this.firstName = capitalize(firstName);
         this.lastName = capitalize(lastName);
-        this.salary = new BigDecimal(String.valueOf(salary));
+        this.salary = salary;
         this.department = department;
     }
 
@@ -45,8 +45,8 @@ public class Employee {
         return department;
     }
 
-    public BigDecimal getSalary() {
-        return salary.setScale(2, RoundingMode.HALF_UP);
+    public int getSalary() {
+        return salary;
     }
 
     @Override

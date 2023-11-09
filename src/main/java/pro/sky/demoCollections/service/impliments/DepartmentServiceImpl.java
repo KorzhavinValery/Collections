@@ -5,8 +5,6 @@ import pro.sky.demoCollections.exceptions.InvalidInputException;
 import pro.sky.demoCollections.model.Employee;
 import pro.sky.demoCollections.service.DepartamentService;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -39,12 +37,15 @@ public class DepartmentServiceImpl implements DepartamentService {
     }
 
     @Override
-    public BigDecimal printSalaryPerDepartment(int department) {
-        BigDecimal sum = employeeServiceImpl.getEmployeeMap()
-                .stream().filter(employee -> employee.getDepartment()==department)
-                .map(Employee::getSalary).reduce(BigDecimal::add).orElseThrow(InvalidInputException::new);
-        return sum.setScale(2, RoundingMode.HALF_UP);
-    }
+    public Integer printSalaryPerDepartment(int department) {
+       return employeeServiceImpl.getEmployeeMap()
+                .stream()
+               .filter(employee -> employee.getDepartment()==department)
+                .collect(Collectors.summingInt(empl -> empl.getSalary()));
+                };
+
+
+
 
     @Override
     public Collection<Employee> printAllFromDepartment(int department) {
